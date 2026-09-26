@@ -40,6 +40,8 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .device { animation: none; }
+  .reveal-ready [data-reveal] { opacity: 1; transform: none; }
 }
 
 body {
@@ -345,6 +347,12 @@ input:focus-visible {
 .device {
   position: relative;
   width: 300px;
+  animation: device-float 4s ease-in-out infinite alternate;
+}
+
+@keyframes device-float {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(10px); }
 }
 
 .device-notch {
@@ -457,6 +465,21 @@ section { padding: 100px 0; position: relative; }
   box-shadow: 0 0 32px -8px var(--accent-glow);
   transform: translateY(-4px);
 }
+
+/* Scroll reveals are enabled only after JavaScript has prepared the elements. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 650ms ease, transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-ready .feature-card.is-visible:hover { transform: translateY(-4px); }
 
 .feature-icon {
   width: 46px;

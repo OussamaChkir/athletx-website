@@ -65,4 +65,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  /* ---- Reveal sections and cards as they enter the viewport ---- */
+  if (!prefersReducedMotion) {
+    const revealItems = document.querySelectorAll(
+      '.section-head, .feature-card, .step, .cta .container'
+    );
+
+    if ('IntersectionObserver' in window) {
+      document.body.classList.add('reveal-ready');
+      revealItems.forEach((item, index) => {
+        item.setAttribute('data-reveal', '');
+        if (item.matches('.feature-card, .step')) {
+          item.style.setProperty('--reveal-delay', `${(index % 4) * 90}ms`);
+        }
+      });
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    }
+  }
 });
