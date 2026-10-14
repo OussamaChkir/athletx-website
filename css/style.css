@@ -1,23 +1,23 @@
 /* ==========================================================================
    Athletx — Stylesheet
    Design concept: "Ascent" — angular, peak-shaped motifs echo the logo's
-   triangular mark. Dark forest-green canvas, neon-green accent used with
+   triangular mark. Near-black canvas, neon-green accent used with
    restraint on interactive/important elements only.
    ========================================================================== */
 
 /* ---- Design tokens ---- */
 :root {
   /* Color */
-  --bg: #0e2610;            /* base canvas, slightly deeper than brand green for depth */
-  --bg-surface: #173d18;    /* brand primary — cards, nav, footer */
-  --bg-surface-2: #1f4d21;  /* elevated surface / hover */
+  --bg: #050505;            /* base canvas */
+  --bg-surface: #111111;    /* cards, nav, footer */
+  --bg-surface-2: #1a1a1a;  /* elevated surface / hover */
   --accent: #08fd8e;        /* neon accent */
   --accent-soft: rgba(8, 253, 142, 0.12);
   --accent-glow: rgba(8, 253, 142, 0.35);
-  --ink: #f4f9f4;           /* primary text */
-  --ink-muted: #aac4ac;     /* secondary text */
-  --ink-faint: #7c9a7f;     /* tertiary / labels */
-  --line: rgba(244, 249, 244, 0.1);
+  --ink: #f4f4f4;           /* primary text */
+  --ink-muted: #a3a3a3;     /* secondary text */
+  --ink-faint: #737373;     /* tertiary / labels */
+  --line: rgba(255, 255, 255, 0.1);
 
   /* Type */
   --font-display: 'Poppins', 'Segoe UI', system-ui, sans-serif;
@@ -114,6 +114,24 @@ input:focus-visible {
 
 .btn-accent svg { flex-shrink: 0; }
 
+.app-store-badge {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.app-store-badge img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.app-store-badge:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
 .btn-ghost {
   background: transparent;
   border-color: var(--line);
@@ -136,7 +154,7 @@ input:focus-visible {
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  background: rgba(14, 38, 16, 0.85);
+  background: rgba(5, 5, 5, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -233,7 +251,7 @@ input:focus-visible {
   overflow: hidden;
   background:
     radial-gradient(ellipse 60% 50% at 80% 10%, var(--accent-soft), transparent 60%),
-    linear-gradient(180deg, var(--bg) 0%, #0b1f0d 100%);
+    linear-gradient(180deg, var(--bg) 0%, #000000 100%);
 }
 
 /* Peak motif — echoes the logo's triangular mark, drawn with pure CSS */
@@ -252,7 +270,7 @@ input:focus-visible {
   height: 0;
   border-left: 140px solid transparent;
   border-right: 140px solid transparent;
-  border-bottom: 220px solid var(--bg-surface);
+  border-bottom: 220px solid #173d18;
 }
 
 .peak::after {
@@ -505,7 +523,7 @@ section { padding: 100px 0; position: relative; }
 }
 
 /* ---- How it works ---- */
-.how { background: linear-gradient(180deg, #0b1f0d, var(--bg)); }
+.how { background: linear-gradient(180deg, #000000, var(--bg)); }
 
 .steps {
   display: grid;
@@ -586,7 +604,7 @@ section { padding: 100px 0; position: relative; }
 
 /* ---- Footer ---- */
 .site-footer {
-  background: #0b1f0d;
+  background: #000000;
   border-top: 1px solid var(--line);
   padding: 56px 0 28px;
 }
@@ -705,7 +723,7 @@ section { padding: 100px 0; position: relative; }
     padding: 24px;
     gap: 20px;
   }
-  .nav-cta .btn-accent span { display: none; }
+  .nav-cta .app-store-badge img { height: 32px; }
   .nav-toggle { display: flex; }
   .hero { padding: 56px 0 90px; }
   .hero-stats { gap: 24px; flex-wrap: wrap; }
