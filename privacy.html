@@ -3,44 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — Athletx</title>
-<meta name="description" content="Athletx privacy policy: what we collect, how we use it, and how to contact us.">
-<link rel="icon" type="image/png" href="assets/favicon-32.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
+<title>Privacy Policy | Athletx</title>
+<meta name="description" content="How Athletx handles your data: workout data stays on your device, how ads and subscriptions work, and how to contact us.">
+<link rel="canonical" href="https://oussamachkir.github.io/athletx-website/privacy.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1e1e25">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Athletx">
+<meta property="og:title" content="Privacy Policy | Athletx">
+<meta property="og:description" content="How Athletx handles your data: workout data stays on your device, how ads and subscriptions work, and how to contact us.">
+<meta property="og:url" content="https://oussamachkir.github.io/athletx-website/privacy.html">
+<meta property="og:image" content="https://oussamachkir.github.io/athletx-website/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | Athletx">
+<meta name="twitter:description" content="How Athletx handles your data: workout data stays on your device, how ads and subscriptions work, and how to contact us.">
+<meta name="twitter:image" content="https://oussamachkir.github.io/athletx-website/assets/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/logo-200.png">
+<link rel="preload" href="assets/fonts/jost-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://oussamachkir.github.io/athletx-website/"},
+    {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://oussamachkir.github.io/athletx-website/privacy.html"}
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ===== Navbar ===== -->
 <header class="navbar">
   <div class="container">
-    <a href="index.html" class="brand">
-      <img src="assets/logo-web.png" alt="Athletx logo">
+    <a href="./" class="brand" aria-label="Athletx home">
+      <!-- IMAGE SLOT: logo. Replace assets/logo-web.png (any width, keep a horizontal logo ~ 4:1 and a transparent background). -->
+      <img src="assets/logo-web.png" alt="Athletx" width="132" height="36">
     </a>
 
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Privacy Policy</a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="./#features">Features</a>
+      <a href="./#how">How it works</a>
+      <a href="./#plans">Free vs Premium</a>
+      <a href="./#faq">FAQ</a>
+      <a href="privacy.html">Privacy</a>
     </nav>
 
     <div class="nav-cta">
       <a href="https://apps.apple.com/us/app/athletx-workout-planner/id6818331268" class="app-store-badge">
-        <img src="./assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Download on the App Store" />
+        <img src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Download Athletx on the App Store" width="150" height="50">
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- ===== Privacy Policy ===== -->
-<main class="policy">
+<main id="main" class="policy">
   <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Home</a> / <span>Privacy Policy</span></nav>
     <div class="policy-header">
       <h1>Privacy Policy</h1>
       <p>Last updated: October 22, 2026</p>
@@ -143,33 +169,41 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="brand">
-          <img src="assets/logo-web.png" alt="Athletx logo">
+        <a href="./" class="brand" aria-label="Athletx home">
+          <img src="assets/logo-web.png" alt="Athletx" width="132" height="36" loading="lazy">
         </a>
-        <p>Train smarter, get stronger. A workout tracker built to keep you consistent.</p>
+        <p>Plan your workouts, train offline, and keep your progress moving.</p>
       </div>
 
       <div class="footer-links">
-        <div class="footer-col">
-          <h4>Site</h4>
-          <a href="index.html">Home</a>
+        <nav class="footer-col" aria-label="Explore">
+          <h2>Explore</h2>
+          <a href="./#features">Features</a>
+          <a href="./#how">How it works</a>
+          <a href="./#plans">Free vs Premium</a>
+          <a href="./#faq">FAQ</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal and support">
+          <h2>Support</h2>
           <a href="privacy.html">Privacy Policy</a>
-        </div>
-        <div class="footer-col">
-          <h4>Get the app</h4>
+          <a href="mailto:oussama501chkir@gmail.com">Contact us</a>
+        </nav>
+        <nav class="footer-col" aria-label="Get the app">
+          <h2>Get the app</h2>
           <a href="https://apps.apple.com/us/app/athletx-workout-planner/id6818331268">App Store</a>
-        </div>
+        </nav>
       </div>
     </div>
 
+    <p class="disclaimer">Athletx provides general fitness information and is not medical advice. Talk to a doctor or other qualified professional before starting a new exercise program.</p>
+
     <div class="footer-bottom">
-      <span>&copy; <span id="year"></span> Athletx. All rights reserved.</span>
-      <span>Made for people who show up.</span>
+      <span>&copy; <span id="year">2026</span> Athletx. All rights reserved.</span>
+      <span>Every session moves you forward.</span>
     </div>
   </div>
 </footer>
 
 <script src="js/script.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -1,14 +1,21 @@
 /* ==========================================================================
-   Athletx — Site script
-   Vanilla JS only. Handles: mobile nav toggle, closing the menu on link
-   click / outside click, active nav-link state, and a single subtle
-   hero entrance animation (kept minimal per design guidance).
+   Athletx site script (vanilla JS, no dependencies)
+   - Mobile menu toggle (closes on link click, outside click and Escape)
+   - aria-current on the nav link for the current page
+   - Scroll reveal, skipped for people who prefer reduced motion
+   - Footer year
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* ---- Mobile nav toggle ---- */
+  /* ---- Mobile nav ---- */
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+
+  const closeMenu = () => {
+    if (!toggle || !navLinks) return;
+    navLinks.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
 
   if (toggle && navLinks) {
     toggle.addEventListener('click', () => {
@@ -16,81 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    /* Close menu after choosing a link (mobile) */
-    navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+    navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !toggle.contains(e.target)) closeMenu();
     });
 
-    /* Close menu on outside click */
-    document.addEventListener('click', (e) => {
-      const clickedInsideNav = navLinks.contains(e.target) || toggle.contains(e.target);
-      if (!clickedInsideNav && navLinks.classList.contains('open')) {
-        navLinks.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
       }
     });
   }
 
-  /* ---- Highlight current page in nav ---- */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  /* ---- Mark the current page in the nav ---- */
+  const page = window.location.pathname.split('/').pop();
   document.querySelectorAll('.nav-links a').forEach((link) => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-      link.classList.add('active');
-    }
+    if (page && href === page) link.setAttribute('aria-current', 'page');
   });
 
-  /* ---- One orchestrated hero entrance (respects reduced-motion) ---- */
+  /* ---- Scroll reveal ---- */
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hero = document.querySelector('.hero');
 
-  if (hero && !prefersReducedMotion) {
-    const revealEls = hero.querySelectorAll('.eyebrow, h1, .lead, .hero-actions, .hero-stats, .hero-visual');
-    revealEls.forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      el.style.transitionDelay = `${i * 90}ms`;
-    });
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        revealEls.forEach((el) => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        });
-      });
-    });
-  }
-
-  /* ---- Reveal sections and cards as they enter the viewport ---- */
-  if (!prefersReducedMotion) {
-    const revealItems = document.querySelectorAll(
-      '.section-head, .feature-card, .step, .cta .container'
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const items = document.querySelectorAll(
+      '.section-head, .showcase, .card, .step, .privacy-grid, .table-wrap, .cta .container'
     );
 
-    if ('IntersectionObserver' in window) {
-      document.body.classList.add('reveal-ready');
-      revealItems.forEach((item, index) => {
-        item.setAttribute('data-reveal', '');
-        if (item.matches('.feature-card, .step')) {
-          item.style.setProperty('--reveal-delay', `${(index % 4) * 90}ms`);
+    document.body.classList.add('reveal-ready');
+    items.forEach((item, i) => {
+      item.setAttribute('data-reveal', '');
+      if (item.matches('.card, .step')) {
+        item.style.setProperty('--reveal-delay', `${(i % 4) * 80}ms`);
+      }
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
         }
       });
+    }, { threshold: 0.12 });
 
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.14 });
-
-      revealItems.forEach((item) => revealObserver.observe(item));
-    }
+    items.forEach((item) => observer.observe(item));
   }
+
+  /* ---- Footer year ---- */
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
 });
